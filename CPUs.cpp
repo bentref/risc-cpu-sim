@@ -1,65 +1,59 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "utils.hpp"
+#include "riscv.hpp"
 
-class integerCore {
+
+class Mod {
 	private:
-		int[32] registers;
-		int PC;
-		
-};
-
-class mod {
-	public:
 		int* l2Cache;
 		int l2Size;
-		bdCore C1;
-		bdCore C2;
+		RISCVCore C1;
+		RISCVCore C2;
+	public:
+		Mod() {
+			this->C1 = RISCVCore();
+			this->C2 = RISCVCore();
+		};
+
+		
 };
 
 class bulldozerCPU {
 	public:
+		std::string name;
 		int* l3Cache;
 		int l3Size;
-		std::vector<mod> modules;
+		std::vector<Mod> modules;
 		int numModules;
 		void printInfo() {
 			std::string reportedCores = std::to_string(this->numModules * 2);
 			std::string reportedModules = std::to_string(this->numModules);
-			std::cout<<"Name" + this->name + "\n";
-			std::cout<<"Name" + this->name + "\n";
+			std::cout<<"Name: " + this->name + "\n";
+			std::cout<<reportedCores + " cores (in " + reportedModules + " physical module(s))";
+		}
 			
 	private:
-		std::string name;
 		int speedMHz;
 };
 
-
-
-
-
-
-class RISCVEmulator {
+class SimpleCPU {
 	public:
-	private:
-		int parseAndCall(std::string& instr) {
-			std::vector<std::string> splitBySpace = split(instr, " ");
-			std::vector<std::string> splitByComma = split(instr, ",");
-			std::string op = splitBySpace[0];
-			return runInstr(op, splitByComma);
+		SimpleCPU() {
+			this->C = RISCVCore();
 		};
-		int runInstr(std::string op, std::vector<std::string> args) {
-			if (op == "addi"){
-				std::cout<<"addi";
-			}
-			else {
-				std::cout<<"default";
-			};
-			return 0;
-				
-		}
-
-		
+		int schedule(std::string instr) {
+			return this->C.parseAndCall(instr);
+		};
+	
+	private:
+		RISCVCore C;
 };
 
+int main() {
+	SimpleCPU cpu1;
+	
+	int result = cpu1.schedule("addi    sp,sp,-32");
+	std::cout<<std::to_string(result);
+	return 0;
+};
