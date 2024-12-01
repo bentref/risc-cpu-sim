@@ -1,9 +1,13 @@
-class bulldozerCPU {
-	public:
-		int* l3Cache;
-		int l3Size;
-		struct mod* modules;
-		int numModules;
+#include <iostream>
+#include <vector>
+#include <string>
+#include "utils.hpp"
+
+class integerCore {
+	private:
+		int[32] registers;
+		int PC;
+		
 };
 
 class mod {
@@ -14,35 +18,48 @@ class mod {
 		bdCore C2;
 };
 
-class bdCore {
+class bulldozerCPU {
 	public:
-		
+		int* l3Cache;
+		int l3Size;
+		std::vector<mod> modules;
+		int numModules;
+		void printInfo() {
+			std::string reportedCores = std::to_string(this->numModules * 2);
+			std::string reportedModules = std::to_string(this->numModules);
+			std::cout<<"Name" + this->name + "\n";
+			std::cout<<"Name" + this->name + "\n";
+			
+	private:
+		std::string name;
+		int speedMHz;
 };
+
+
+
+
+
 
 class RISCVEmulator {
 	public:
 	private:
-		std::vector<std::string> parseInstr(std::string& instr) {
-			std::string splitBySpace = split(instr, " ");
-			std::vector<std::string> args = split(instr, ",");
+		int parseAndCall(std::string& instr) {
+			std::vector<std::string> splitBySpace = split(instr, " ");
+			std::vector<std::string> splitByComma = split(instr, ",");
 			std::string op = splitBySpace[0];
-			
+			return runInstr(op, splitByComma);
+		};
+		int runInstr(std::string op, std::vector<std::string> args) {
+			if (op == "addi"){
+				std::cout<<"addi";
+			}
+			else {
+				std::cout<<"default";
+			};
+			return 0;
+				
 		}
+
+		
 };
-			
 
-// Tokenize strings. Source: https://stackoverflow.com/a/14266139	
-std::vector<std::string> split(std::string& s, const std::string& delimiter) {
-    std::vector<std::string> tokens;
-    size_t pos = 0;
-    std::string token;
-    while ((pos = s.find(delimiter)) != std::string::npos) {
-        token = s.substr(0, pos);
-        tokens.push_back(token);
-        s.erase(0, pos + delimiter.length());
-        // Consumes split and delimiter portions of s
-    }
-    tokens.push_back(s);
-
-    return tokens;
-}
