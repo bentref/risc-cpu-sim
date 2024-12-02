@@ -4,10 +4,12 @@
 
 class RISCVCore {
 	public:
-		int registers[32];
 		int PC;
 		int parseAndCall(std::string& instr);
+		void setRegister(int reg, int x);
+		int getRegister(int reg);
 		RISCVCore();
 	private:
 		int runInstr(std::string op, std::vector<std::string> args);
+		int registers[32];
 };

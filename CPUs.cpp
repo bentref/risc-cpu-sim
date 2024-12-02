@@ -46,7 +46,7 @@ class SimpleCPU {
 			return this->C.parseAndCall(instr);
 		};
 		int getRegValue(int reg) {
-			return this->C.registers[reg];
+			return this->C.getRegister(reg);
 		};
 	
 	
