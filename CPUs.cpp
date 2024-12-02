@@ -38,16 +38,15 @@ class bulldozerCPU {
 };
 
 class SimpleCPU {
+	private:
+		RISCVCore C;
 	public:
-		SimpleCPU() {
-			this->C = RISCVCore();
-		};
+	
 		int schedule(std::string instr) {
 			return this->C.parseAndCall(instr);
 		};
 	
-	private:
-		RISCVCore C;
+	
 };
 
 int main() {

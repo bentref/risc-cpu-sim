@@ -1,3 +1,7 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
 class RISCVCore {
 	public:
 		int registers[32];

@@ -1,3 +1,6 @@
+#include <vector>
+#include <string>
+
 // Tokenize strings. Source: https://stackoverflow.com/a/14266139	
 std::vector<std::string> split(std::string& s, const std::string& delimiter) {
     std::vector<std::string> tokens;
