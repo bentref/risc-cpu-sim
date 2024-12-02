@@ -5,8 +5,7 @@
 #include "utils.hpp"
 
 RISCVCore::RISCVCore() {
-	// do nothing
-	return;
+	this->registers[0] = 0; // set x0 register. TODO: Make it impossible to change
 };
 
 int RISCVCore::parseAndCall (std::string& instr) {
@@ -18,8 +17,14 @@ int RISCVCore::parseAndCall (std::string& instr) {
 
 int RISCVCore::runInstr(std::string op, std::vector<std::string> args) {
 	if (op == "addi"){
-		std::cout<<"addi";
+		// addi rd,rs1,imm
+		int rd = std::stoi(args[0]);
+		int rs1 = std::stoi(args[1]);
+		int imm = std::stoi(args[2]);
+		this->registers[rd] = this->registers[rs1] + imm;
+		return 0;
 	}
+	
 	else {
 		std::cout<<"default";
 	};

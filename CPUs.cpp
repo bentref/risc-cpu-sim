@@ -45,6 +45,9 @@ class SimpleCPU {
 		int schedule(std::string instr) {
 			return this->C.parseAndCall(instr);
 		};
+		int getRegValue(int reg) {
+			return this->C.registers[reg];
+		};
 	
 	
 };
@@ -52,7 +55,9 @@ class SimpleCPU {
 int main() {
 	SimpleCPU cpu1;
 	
-	int result = cpu1.schedule("addi    sp,sp,-32");
-	std::cout<<std::to_string(result);
+	int result = cpu1.schedule("addi    1,0,55");
+	result = cpu1.schedule("addi 2,1,1");
+	result = cpu1.getRegValue(2);
+	std::cout<<std::to_string(result)<<'\n';
 	return 0;
 };
