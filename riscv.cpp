@@ -28,19 +28,30 @@ int RISCVCore::getRegister(int reg) {
 };
 
 int RISCVCore::runInstr(std::string op, std::vector<std::string> args) {
+	// Convert each arg to int using stoi
+	std::vector<int> intArgs;
+	for (std::string arg : args) {
+		intArgs.push_back(std::stoi(arg));
+	}
 	if (op == "addi"){
-		// addi rd,rs1,imm
-		int rd = std::stoi(args[0]);
-		int rs1 = std::stoi(args[1]);
-		int imm = std::stoi(args[2]);
-		int result = this->registers[rs1] + imm;
-		this->setRegister(rd, result);
+		// Format: addi rd,rs1,imm
+		int result = this->registers[intArgs[1]] + intArgs[2];
+		this->setRegister(intArgs[0], result);
 		return 0;
 	}
-	
+	if (op == "lui") {
+		// lui rd,imm
+		this->setRegister(intArgs[0], intArgs[1]);
+		return 0;
+	}
+	if (op == "slti") {
+		int result = 
+			(this->getRegister(intArgs[1] < intArgs[2])) ? 1 : 0;
+		this->setRegister(intArgs[0], result);
+	}
 	else {
 		std::cout<<"default";
-	};
+	}
 	return 0;
 		
 };

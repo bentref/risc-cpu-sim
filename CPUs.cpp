@@ -57,7 +57,8 @@ int main() {
 	
 	int result = cpu1.schedule("addi    1,0,55");
 	result = cpu1.schedule("addi 2,1,1");
-	result = cpu1.getRegValue(2);
+	result = cpu1.schedule("slti 5,2,57");
+	result = cpu1.getRegValue(5);
 	std::cout<<std::to_string(result)<<'\n';
 	return 0;
 };
