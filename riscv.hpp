@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstdint>
 
 class RISCVCore {
 	public:
@@ -11,5 +12,5 @@ class RISCVCore {
 		RISCVCore();
 	private:
 		int runInstr(std::string op, std::vector<std::string> args);
-		int registers[32];
+		uint32_t registers[32];
 };

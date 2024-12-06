@@ -33,6 +33,11 @@ int RISCVCore::runInstr(std::string op, std::vector<std::string> args) {
 	for (std::string arg : args) {
 		intArgs.push_back(std::stoi(arg));
 	}
+	if (op == "lui") {
+		// lui rd,imm
+		this->setRegister(intArgs[0], intArgs[1] << 12);
+		return 0;
+	}
 	if (op == "addi"){
 		// Format: addi rd,rs1,imm
 		int result = this->registers[intArgs[1]] + intArgs[2];
@@ -48,6 +53,12 @@ int RISCVCore::runInstr(std::string op, std::vector<std::string> args) {
 		int result = 
 			(this->getRegister(intArgs[1] < intArgs[2])) ? 1 : 0;
 		this->setRegister(intArgs[0], result);
+		return 0;
+	}
+	if (op == "xori") {
+		int result = this->getRegister(intArgs[1]) ^ intArgs[2];
+		this->setRegister(intArgs[0], result);
+		return 0;
 	}
 	else {
 		std::cout<<"default";
